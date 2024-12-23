@@ -1,0 +1,120 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.chat p:nth-child(odd) {
+  background-color: #d1e7ff;
+  color: #000;
+  padding: 10px 15px;
+  border-radius: 15px;
+  align-self: flex-end;
+  max-width: 60%;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+.chat p:nth-child(even) {
+  background-color: #e2e3e5;
+  color: #000;
+  padding: 10px 15px;
+  border-radius: 15px;
+  align-self: flex-start;
+  max-width: 60%;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+.input-container {
+  display: block;
+  width: 60%;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 16px;
+  margin: 10px auto;
+  box-sizing: border-box;
+  overflow-y: auto;
+  resize: none;
+  background-color: #f9f9f9;
+  color: #333;
+  outline: none;
+}
+
+.input-container:focus {
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  background-color: #fff;
+}
+
+.input-container::placeholder {
+  color: #999;
+  font-style: italic;
+}
+/* Conteneur pour la zone de texte et le bouton */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacement entre la zone de texte et le bouton */
+  padding: 10px;
+  background-color: #ffffff; /* Fond blanc */
+  width: 80%;
+  max-width: 800px; /* Largeur maximale */
+  margin: 0 auto 20px auto; /* Centré horizontalement et en bas */
+}
+
+/* Zone de texte */
+.input-container {
+  flex: 1;
+  min-height: 40px; /* Hauteur minimale pour 1 ligne */
+  max-height: 120px; /* Hauteur maximale pour 3 lignes */
+  border: none;
+  font-size: 16px;
+  padding: 10px;
+  background-color: #f9f9f9; /* Fond doux */
+  color: #333;
+  border-radius: 8px;
+  resize: none; /* Désactive le redimensionnement manuel */
+  overflow-y: auto;
+  box-sizing: border-box;
+  outline: none; /* Supprime l'effet de focus par défaut */
+  transition: background-color 0.3s;
+}
+
+.input-container:focus {
+  background-color: #ffffff; /* Fond blanc au focus */
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Ombre légère */
+}
+
+/* Bouton Envoyer */
+.send-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.send-button:hover {
+  background-color: #3a78c2;
+}
+
+.send-button:active {
+  background-color: #2a68a2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
