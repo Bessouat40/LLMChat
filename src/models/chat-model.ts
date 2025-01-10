@@ -17,4 +17,10 @@ export class ChatModel {
   addChat(chat: Chat): void {
     this.chats.push(chat);
   }
+
+  updateLastChat(response: string): void {
+    if (this.chats.length > 0) {
+      this.chats[this.chats.length - 1].response = response;
+    }
+  }
 }

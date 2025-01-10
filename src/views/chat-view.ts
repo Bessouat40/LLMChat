@@ -1,11 +1,14 @@
 import { Chat } from '../models/chat-model';
+import { Settings } from '../settings';
 
 export class ChatView {
   private chatsElement!: HTMLElement | null;
   private questionElement!: HTMLTextAreaElement;
   private sendButton!: HTMLButtonElement;
   constructor() {
-    this.chatsElement = document.querySelector<HTMLDivElement>('.chat');
+    this.chatsElement = document.querySelector<HTMLDivElement>(
+      Settings.CHAT_CLASS
+    );
     if (this.chatsElement === null) {
       throw new Error('chatsElement is undefined');
     }
@@ -15,10 +18,10 @@ export class ChatView {
 
   initTextArea() {
     const inputWrapper = document.createElement('div');
-    inputWrapper.className = 'input-wrapper';
+    inputWrapper.className = Settings.INPUT_WRAPPER_CLASS;
 
     this.questionElement = document.createElement('textarea');
-    this.questionElement.className = 'input-container';
+    this.questionElement.className = Settings.INPUT_CONTAINER_CLASS;
     this.questionElement.addEventListener('input', () => {
       this.questionElement.style.height = 'auto';
       this.questionElement.style.height =
@@ -28,7 +31,7 @@ export class ChatView {
     });
 
     this.sendButton = document.createElement('button');
-    this.sendButton.className = 'send-button';
+    this.sendButton.className = Settings.SEND_BUTTON_CLASS;
     this.sendButton.textContent = 'Send';
 
     inputWrapper.appendChild(this.questionElement);
@@ -71,6 +74,9 @@ export class ChatView {
   }
 
   displayChats(chats: Chat[]) {
+    if (this.chatsElement) {
+      this.chatsElement.innerHTML = '';
+    }
     chats.forEach((chat: Chat) => {
       this.displayChat(chat);
     });

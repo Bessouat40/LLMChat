@@ -1,5 +1,6 @@
 import { ChatView } from '../views/chat-view';
 import { Chat, ChatModel } from '../models/chat-model';
+import { ApiService } from '../services/apiService';
 
 export class ChatController {
   private model!: ChatModel;
@@ -18,11 +19,15 @@ export class ChatController {
     this.view.displayChats(chats);
   }
 
-  newQuestion(question: string): void {
-    const response = 'new response';
-    const newChat = new Chat(question, response);
+  async newQuestion(question: string): Promise<void> {
+    const newChat = new Chat(question, '⏳');
     if (this.model !== undefined) {
       this.model.addChat(newChat);
+    }
+    this.displayChats();
+    const response = await ApiService.postQuestion(question);
+    if (this.model !== undefined) {
+      this.model.updateLastChat(response);
     }
     this.displayChats();
   }
