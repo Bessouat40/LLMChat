@@ -2,7 +2,7 @@
 
 It's a minimalist application to test your LLM.
 
-![LLMChat applicaion](media/chatllm.png)
+[[Demonstration]](./media/raglight_chat.mov)
 
 ## Installation
 
