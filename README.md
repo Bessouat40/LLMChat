@@ -12,9 +12,13 @@ LLMChat is a minimalist application designed to test and interact with your LLM 
 
 ## Installation ⚙️
 
-1. Modify the configuration file `src/settings.ts` to match your environment and preferences. 🛠️
+1. Install dependencies and start the backend:
 
-2. Install dependencies and start the application:
+```bash
+python -m pip install -r api_example/requirements.txt
+```
+
+1. Install dependencies and start the frontend:
 
 ```bash
 npm i && npm run start
@@ -22,15 +26,9 @@ npm i && npm run start
 
 ## API Example 🖥️
 
-You can find an API usage example in the `api_example/main.py` file.
+You can find an API example in the `api_example/main.py` file.
 
 [RAGLight](https://github.com/Bessouat40/RAGLight) is the core framework powering LLMChat. Install it via PyPI.
-
-To run the example:
-
-```bash
-python main.py
-```
 
 ## How It Works 🤔
 
