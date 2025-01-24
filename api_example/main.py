@@ -15,7 +15,8 @@ class QueryModel(BaseModel):
 Settings.setup_logging()
 
 pipeline = RAGPipeline(knowledge_base=[
-GitHubSource(url="https://github.com/Bessouat40/RAGLight")
+GitHubSource(url="https://github.com/Bessouat40/RAGLight"),
+GitHubSource(url="https://github.com/Bessouat40/LLMChat")
 # FolderSource(path="Path to your knowledge base containing PDF, docx, ...")
 ], model_name="llama3")
 
