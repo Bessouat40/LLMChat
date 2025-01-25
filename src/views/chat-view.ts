@@ -1,10 +1,12 @@
 import { Chat } from '../models/chat-model';
 import { Settings } from '../settings';
+import { marked } from 'marked';
 
 export class ChatView {
   private chatsElement!: HTMLElement | null;
   private questionElement!: HTMLTextAreaElement;
   private sendButton!: HTMLButtonElement;
+
   constructor() {
     this.chatsElement = document.querySelector<HTMLDivElement>(
       Settings.CHAT_CLASS
@@ -63,12 +65,15 @@ export class ChatView {
   }
 
   displayChat(chat: Chat) {
-    let questionElement = document.createElement('p');
-    let responseElement = document.createElement('p');
-    const question = chat.question;
-    const response = chat.response;
-    responseElement.textContent = response;
-    questionElement.textContent = question;
+    const questionElement = document.createElement('p');
+    const responseElement = document.createElement('div');
+    questionElement.textContent = chat.question;
+
+    responseElement.innerHTML = marked(chat.response) as string;
+
+    questionElement.className = 'chat-question';
+    responseElement.className = 'chat-response';
+
     this.chatsElement?.appendChild(questionElement);
     this.chatsElement?.appendChild(responseElement);
   }
