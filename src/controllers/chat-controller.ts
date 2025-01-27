@@ -1,6 +1,6 @@
 import { ChatView } from '../views/chat-view';
 import { Chat, ChatModel } from '../models/chat-model';
-import { ApiService } from '../services/apiService';
+import { ApiService } from '../services/api-service';
 
 export class ChatController {
   private model!: ChatModel;

@@ -63,12 +63,12 @@ export class SourceView {
     githubOption.value = 'github';
     githubOption.text = 'GitHub Repo';
 
-    const folderOption = document.createElement('option');
-    folderOption.value = 'folder';
-    folderOption.text = 'Local Folder';
+    // const folderOption = document.createElement('option');
+    // folderOption.value = 'folder';
+    // folderOption.text = 'Local Folder';
 
     this.sourceTypeSelect.appendChild(githubOption);
-    this.sourceTypeSelect.appendChild(folderOption);
+    // this.sourceTypeSelect.appendChild(folderOption);
     this.modalBody.appendChild(this.sourceTypeSelect);
 
     this.sourcePathInput = document.createElement('input');

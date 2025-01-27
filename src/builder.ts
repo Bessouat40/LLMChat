@@ -1,9 +1,9 @@
 import { ChatController } from './controllers/chat-controller';
 import { ChatModel } from './models/chat-model';
 import { ChatView } from './views/chat-view';
-import { SourceController } from './controllers/sourceController';
+import { SourceController } from './controllers/source-controller';
 import { SourceModel } from './models/chat-model';
-import { SourceView } from './views/sourceView';
+import { SourceView } from './views/source-view';
 
 export class ChatBuilder {
   private chatView!: ChatView;

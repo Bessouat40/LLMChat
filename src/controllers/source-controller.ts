@@ -1,6 +1,6 @@
 import { SourceModel, Source } from '../models/chat-model';
-import { SourceView } from '../views/sourceView';
-import { SourceService } from '../services/sourceService';
+import { SourceView } from '../views/source-view';
+import { SourceService } from '../services/source-service';
 
 export class SourceController {
   private model: SourceModel;
