@@ -17,7 +17,7 @@ export class SourceController {
     this.loadSources();
   }
 
-  async loadSources() {
+  private async loadSources() {
     try {
       const sources = await SourceService.getSources();
       this.model.setSources(sources);
@@ -28,14 +28,22 @@ export class SourceController {
   }
 
   async addNewSource(sourceType: string, sourcePath: string) {
+    this.view.setIngestionInProgress(true);
+
     const newSource = new Source(sourceType, sourcePath);
     try {
       const msg = await SourceService.addSource(newSource);
       console.log('addNewSource response:', msg);
 
       await this.loadSources();
+
+      this.view.setIngestionInProgress(false);
+
+      this.view.showIngestionSuccessMessage('Ingestion completed!');
     } catch (err) {
       console.error('Failed to add new source:', err);
+      this.view.setIngestionInProgress(false);
+      this.view.showIngestionErrorMessage('Error during ingestion');
     }
   }
 }

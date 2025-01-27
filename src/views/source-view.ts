@@ -9,6 +9,8 @@ export class SourceView {
 
   private modalBody: HTMLDivElement;
 
+  private ingestionStatusElement: HTMLDivElement;
+
   private sourcesList: HTMLUListElement;
 
   private sourceTypeSelect: HTMLSelectElement;
@@ -18,6 +20,10 @@ export class SourceView {
   private settingsButton: HTMLButtonElement;
 
   constructor() {
+    this.ingestionStatusElement = document.createElement('div');
+    this.ingestionStatusElement.classList.add('ingestion-status');
+    this.ingestionStatusElement.style.display = 'none';
+    document.body.appendChild(this.ingestionStatusElement);
     this.settingsButton = document.createElement('button');
     this.settingsButton.classList.add('settings-button');
     this.settingsButton.textContent = '⚙️';
@@ -87,6 +93,29 @@ export class SourceView {
     });
 
     this.modalWindow.appendChild(this.modalBody);
+  }
+
+  setIngestionInProgress(isInProgress: boolean) {
+    if (isInProgress) {
+      this.ingestionStatusElement.textContent = 'Ingestion in progress...';
+      this.ingestionStatusElement.style.display = 'block';
+    } else {
+      this.ingestionStatusElement.style.display = 'none';
+    }
+  }
+
+  showIngestionSuccessMessage(message: string) {
+    this.ingestionStatusElement.textContent = message;
+    this.ingestionStatusElement.style.display = 'block';
+
+    setTimeout(() => {
+      this.ingestionStatusElement.style.display = 'none';
+    }, 3000);
+  }
+
+  showIngestionErrorMessage(message: string) {
+    this.ingestionStatusElement.textContent = message;
+    this.ingestionStatusElement.style.display = 'block';
   }
 
   setSources(sources: Source[]) {
