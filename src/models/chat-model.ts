@@ -24,3 +24,28 @@ export class ChatModel {
     }
   }
 }
+export class Source {
+  sourceType: string;
+  sourcePath: string;
+
+  constructor(sourceType: string, sourcePath: string) {
+    this.sourceType = sourceType;
+    this.sourcePath = sourcePath;
+  }
+}
+
+export class SourceModel {
+  private sources: Source[] = [];
+
+  setSources(sources: Source[]) {
+    this.sources = sources;
+  }
+
+  addSource(source: Source) {
+    this.sources.push(source);
+  }
+
+  getSources(): Source[] {
+    return this.sources;
+  }
+}
