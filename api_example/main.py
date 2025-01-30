@@ -25,7 +25,7 @@ Settings.setup_logging()
 pipeline = RATPipeline(knowledge_base=[
     GitHubSource(url="https://github.com/Bessouat40/RAGLight"),
     # GitHubSource(url="https://github.com/Bessouat40/LLMChat")
-], model_name="deepseek-r1:1.5b", reasoning_model_name="deepseek-r1:1.5b", reflection=3, provider=Settings.LMSTUDIO)
+], model_name="deepseek-r1-distill-llama-8b", reasoning_model_name="deepseek-r1-distill-llama-8b", reflection=3, provider=Settings.LMSTUDIO)
 pipeline.build()
 
 app = FastAPI()
