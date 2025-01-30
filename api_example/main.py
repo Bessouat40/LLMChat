@@ -18,14 +18,14 @@ class SourceModel(BaseModel):
 
 Settings.setup_logging()
 
-pipeline = RAGPipeline(knowledge_base=[
-    GitHubSource(url="https://github.com/Bessouat40/RAGLight"),
-    GitHubSource(url="https://github.com/Bessouat40/LLMChat")
-], model_name="llama3")
-# pipeline = RATPipeline(knowledge_base=[
+# pipeline = RAGPipeline(knowledge_base=[
 #     GitHubSource(url="https://github.com/Bessouat40/RAGLight"),
 #     GitHubSource(url="https://github.com/Bessouat40/LLMChat")
-# ], model_name="llama3", reasoning_model_name="deepseek-r1:1.5b", reflection=2)
+# ], model_name="llama3")
+pipeline = RATPipeline(knowledge_base=[
+    GitHubSource(url="https://github.com/Bessouat40/RAGLight"),
+    # GitHubSource(url="https://github.com/Bessouat40/LLMChat")
+], model_name="deepseek-r1:1.5b", reasoning_model_name="deepseek-r1:1.5b", reflection=3, provider=Settings.LMSTUDIO)
 pipeline.build()
 
 app = FastAPI()

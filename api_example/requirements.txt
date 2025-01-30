@@ -1,4 +1,4 @@
-raglight==1.1.7
+raglight==1.2.0
 fastapi==0.115.5
 uvicorn==0.20.0
 pydantic==2.9.2
