@@ -1,17 +1,24 @@
 import { Chat } from '../models/chat-model';
 import { Settings } from '../settings';
 import { marked } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github-dark.css';
+
+marked.setOptions({
+  highlight: (code: string, language: string) =>
+    hljs.highlightAuto(code, [language]).value,
+} as any);
 
 export class ChatView {
-  private chatsElement!: HTMLElement | null;
+  private chatsElement!: HTMLElement;
   private questionElement!: HTMLTextAreaElement;
   private sendButton!: HTMLButtonElement;
 
   constructor() {
     this.chatsElement = document.querySelector<HTMLDivElement>(
       Settings.CHAT_CLASS
-    );
-    if (this.chatsElement === null) {
+    )!;
+    if (!this.chatsElement) {
       throw new Error('chatsElement is undefined');
     }
     document.body.appendChild(this.chatsElement);
@@ -34,7 +41,7 @@ export class ChatView {
 
     this.sendButton = document.createElement('button');
     this.sendButton.className = Settings.SEND_BUTTON_CLASS;
-    this.sendButton.textContent = 'Send';
+    this.sendButton.textContent = 'Envoyer';
 
     inputWrapper.appendChild(this.questionElement);
     inputWrapper.appendChild(this.sendButton);
@@ -43,9 +50,10 @@ export class ChatView {
   }
 
   private scrollToBottom() {
-    if (this.chatsElement) {
-      this.chatsElement.scrollTop = this.chatsElement.scrollHeight;
-    }
+    this.chatsElement.scrollTo({
+      top: this.chatsElement.scrollHeight,
+      behavior: 'smooth',
+    });
   }
 
   newQuestion(callback: (question: string) => void) {
@@ -64,27 +72,24 @@ export class ChatView {
     });
   }
 
-  displayChat(chat: Chat) {
+  async displayChat(chat: Chat) {
     const questionElement = document.createElement('p');
     const responseElement = document.createElement('div');
     questionElement.textContent = chat.question;
 
-    responseElement.innerHTML = marked(chat.response) as string;
+    // Rendu Markdown avec coloration syntaxique
+    responseElement.innerHTML = await marked(chat.response);
 
     questionElement.className = 'chat-question';
     responseElement.className = 'chat-response';
 
-    this.chatsElement?.appendChild(questionElement);
-    this.chatsElement?.appendChild(responseElement);
+    this.chatsElement.appendChild(questionElement);
+    this.chatsElement.appendChild(responseElement);
   }
 
   displayChats(chats: Chat[]) {
-    if (this.chatsElement) {
-      this.chatsElement.innerHTML = '';
-    }
-    chats.forEach((chat: Chat) => {
-      this.displayChat(chat);
-    });
+    this.chatsElement.innerHTML = '';
+    chats.forEach((chat: Chat) => this.displayChat(chat));
     this.scrollToBottom();
   }
 }

@@ -8,6 +8,23 @@ html {
   font-family: Arial, sans-serif;
 }
 
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #e2e3e5;
+  --text-color: #333;
+  --background-color: #ffffff;
+  --input-bg: #f9f9f9;
+}
+
+.chat p,
+.chat .chat-response {
+  transition: all 0.3s ease-in-out;
+}
+
+.send-button {
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
 .chat {
   flex: 1;
   display: flex;
@@ -16,8 +33,6 @@ html {
   overflow-y: auto;
   margin-top: 43px;
 }
-
-.chat p:nth-child(odd),
 .chat .chat-question {
   background-color: #d1e7ff;
   color: #000;
@@ -29,7 +44,6 @@ html {
   margin-bottom: 10px;
 }
 
-.chat p:nth-child(even),
 .chat .chat-response {
   background-color: #e2e3e5;
   color: #000;

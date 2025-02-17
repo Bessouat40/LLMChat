@@ -5,9 +5,18 @@ import uvicorn
 from pydantic import BaseModel
 
 from raglight.rag.simple_rag_api import RAGPipeline
-from raglight.rat.simple_rat_api import RATPipeline
 from raglight.models.data_source_model import FolderSource, GitHubSource
 from raglight.config.settings import Settings
+
+Settings.setup_logging()
+
+pipeline = RAGPipeline(knowledge_base=[
+    ],
+    model_name="llama3",
+    provider=Settings.OLLAMA,
+    k=5)
+
+pipeline.build()
 
 class QueryModel(BaseModel):
     question: str
@@ -17,16 +26,6 @@ class SourceModel(BaseModel):
     sourcePath: str
 
 Settings.setup_logging()
-
-# pipeline = RAGPipeline(knowledge_base=[
-#     GitHubSource(url="https://github.com/Bessouat40/RAGLight"),
-#     GitHubSource(url="https://github.com/Bessouat40/LLMChat")
-# ], model_name="llama3")
-pipeline = RATPipeline(knowledge_base=[
-    GitHubSource(url="https://github.com/Bessouat40/RAGLight"),
-    # GitHubSource(url="https://github.com/Bessouat40/LLMChat")
-], model_name="deepseek-r1-distill-llama-8b", reasoning_model_name="deepseek-r1-distill-llama-8b", reflection=3, provider=Settings.LMSTUDIO)
-pipeline.build()
 
 app = FastAPI()
 
