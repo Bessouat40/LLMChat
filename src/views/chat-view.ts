@@ -5,8 +5,13 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/github-dark.css';
 
 marked.setOptions({
-  highlight: (code: string, language: string) =>
-    hljs.highlightAuto(code, [language]).value,
+  highlight: (code: string, language: string) => {
+    if (language && hljs.getLanguage(language)) {
+      return hljs.highlight(code, { language }).value;
+    } else {
+      return hljs.highlightAuto(code).value;
+    }
+  },
 } as any);
 
 export class ChatView {
@@ -87,9 +92,40 @@ export class ChatView {
     this.chatsElement.appendChild(responseElement);
   }
 
-  displayChats(chats: Chat[]) {
+  addCopyButtons() {
+    const codeBlocks = document.querySelectorAll('pre code');
+
+    codeBlocks.forEach((codeBlock) => {
+      const container = document.createElement('div');
+      container.className = 'code-container';
+
+      const preElement = codeBlock.parentElement;
+      if (!preElement) return;
+
+      preElement.parentNode?.insertBefore(container, preElement);
+
+      container.appendChild(preElement);
+
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-button';
+      copyButton.textContent = 'Copy';
+
+      copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(codeBlock.textContent || '');
+        copyButton.textContent = 'Copied !';
+        setTimeout(() => (copyButton.textContent = 'Copy'), 2000);
+      });
+
+      container.appendChild(copyButton);
+    });
+  }
+
+  async displayChats(chats: Chat[]) {
     this.chatsElement.innerHTML = '';
-    chats.forEach((chat: Chat) => this.displayChat(chat));
+
+    await Promise.all(chats.map((chat) => this.displayChat(chat)));
+
     this.scrollToBottom();
+    this.addCopyButtons();
   }
 }

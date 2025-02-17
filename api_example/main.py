@@ -14,7 +14,7 @@ pipeline = RAGPipeline(knowledge_base=[
     ],
     model_name="llama3",
     provider=Settings.OLLAMA,
-    k=5)
+    k=15)
 
 pipeline.build()
 
